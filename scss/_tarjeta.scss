@@ -1,0 +1,51 @@
+
+.tarjeta{
+
+    @extend %tarjeta;
+
+    box-shadow: $sombra;
+
+    img{
+        
+        width: 320px;
+        height: 170px;
+        border-radius: 20px;
+        align-self: center;
+        padding: 8px;
+        padding-top: 10px;
+        
+        
+    }
+
+    .descripcionTarjeta{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 8px;
+        padding: 10px;
+    }
+    
+    .botonesTarjeta {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        padding: 0px 8px;
+    
+        button{
+            @include button(black,white);
+            &:hover{
+                background-color: $colorSecundario;
+            }
+
+          }
+      }   
+}
+
+
+
+
+
+
+
+

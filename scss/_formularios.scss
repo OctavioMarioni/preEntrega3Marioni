@@ -1,0 +1,134 @@
+
+.bodyUsuarios{ 
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto 700px auto;
+    grid-template-areas:    "nav nav"
+                            "header header"
+                            "mainFormulario mainFormulario"
+                            "footer footer";
+} 
+
+.mainFormulario{
+    grid-area: mainFormulario;
+    background-color:  $colorPrincipal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+.formulario{
+    background-color: white;
+    min-height: 399px;
+    width: 550px;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+}
+
+
+
+
+
+
+.formularioDatos{
+    gap: 35px;
+    display: flex;
+    flex-direction: column;
+
+
+    button{
+        @include button(black,white);
+        &:hover{
+            background-color: $colorSecundario
+        }
+        
+    }
+        
+    .itemFormulario {
+
+        input[type="text"], input[type="password"] {
+            border:  1px solid;
+            height: 55px;
+            width: 100%;
+            outline: none;
+            border-radius: 100px;
+        }
+        label{
+        margin-bottom: 10px;
+        position: absolute;
+        padding: 0 10px;
+        transform: translate(10px, -10px);
+        font-size: 14px;
+        background-color: white;
+
+            
+    
+     }
+    }
+}
+
+    .headerForm{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 50px;
+        h2{
+            font-size: 40px;
+
+        
+        
+    }
+}
+@media (max-width:576px){
+
+    .mainFormulario{
+        background: none;
+        height: auto;
+    }
+    .formulario{
+        border-radius: 0px;
+        width: 100%;
+    
+    }
+    .headerForm{
+        align-items: center;
+    }
+}
+
+@media (max-width:476px){
+    .formulario{
+        border-radius: 0px;
+        width: 100%;
+        padding: 10px;
+    
+    }
+}
+
+
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+

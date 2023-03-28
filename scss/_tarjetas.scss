@@ -1,0 +1,11 @@
+.tarjetas{
+    grid-area: tarjetas;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $colorPrincipal;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+
+}
+
