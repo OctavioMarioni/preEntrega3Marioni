@@ -23,8 +23,14 @@
               <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
               <a class="nav-link" href="./quienesSomos.html">Quines somos</a>
               <a class="nav-link" href="./Catalogo.html">Catalogo</a>
-              <a class="nav-link" href="./iniciarSesion.html">iniciar sesion</a>
-              <a class="nav-link" href="./registro.html">Registro</a>
+              <form class="d-flex">
+
+                <button id="btnModalLogin" class="btn btn-outline-primary me-2 toggles" type="button" data-bs-toggle="modal"
+                    data-bs-target="#modalLogin">Login</button>
+                <button id="btnLogout" class="btn btn-outline-secondary d-none toggles" type="button">Logout</button>
+                <p id="nombreUsuario" class="d-none toggles"></p>
+
+            </form>
             </div>
           </div>
         </div>
