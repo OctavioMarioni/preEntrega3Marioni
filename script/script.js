@@ -23,45 +23,18 @@ const Usuarios = [{
 
 }
 ]
-const juegos = [{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-},
-{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-},
-{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-},
-{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-},
-{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-},
-{
-    Titulo: '',
-    portada: '',
-    descripcion: '',
-    valoracion: '',
-}
-]
 
-function ValidarUsuario(baseUsuarios, user, pass) {
+const mailLogin = document.getElementById('emailLogin'),
+    passLogin = document.getElementById('passwordLogin'),
+    recordar = document.getElementById('recordarme'),
+    btnLogin = document.getElementById('login'),
+    btnLogout = document.getElementById('btnLogout'),
+    modalEl = document.getElementById('modalLogin'),
+    nombreUsuario = document.getElementById('nombreUsuario'),
+    modal = new bootstrap.Modal(modalEl),
+    toggles = document.querySelectorAll('.toggles');
+
+function validarUsuario(baseUsuarios, user, pass) {
     let encontrado = baseUsuarios.find((baseUsuarios) => baseUsuarios.mail == user);
 
     if (typeof encontrado === 'undefined') {
@@ -78,11 +51,11 @@ function ValidarUsuario(baseUsuarios, user, pass) {
 }
 
 
-function GuardarDatos(baseUsuarios, storage) {
+function guardarDatos(baseUsuario, storage) {
     const usuario = {
-        'name': usuarioDB.nombre,
-        'user': usuarioDB.mail,
-        'pass': usuarioDB.pass
+        'name': baseUsuario.nombre,
+        'user': baseUsuario.mail,
+        'pass': baseUsuario.pass
     }
 
     storage.setItem('usuario', JSON.stringify(usuario));
@@ -95,21 +68,49 @@ function recuperarDatos(storage) {
 }
 
 function MostrarUsuario(usuario) {
-    nombreUsurio.innerHTML = '<span>${usuario.name}</span>'
+    nombreUsuario.innerHTML = `<span>${usuario.name}</span>`
 }
 
-function mostrarJuegos(array) {
-    Carrito.innerHTML = '';
+
+
+
+function hudLogeado(array, clase) {
     array.forEach(element => {
-        let html = `<div class="card cardJuego" id="tarjeta${element.titulo}">
-                <h3 class="card-header" id="tituloJuego">Nombre: ${element.titulo}</h3>
-                <img src="${element.portada}" alt="${element.titulo}" class="card-img-bottom" id="portadaJuego">
-                <div class="card-body">
-                    <p class="card-text" id="descripcionMascota">Especie: ${element.descripcion}</p>
-                    <p class="card-text" id="valoracion">Edad: ${element.valoracion} años</p>
-                </div>
-            </div>`;
-        contTarjetas.innerHTML += html;
+        element.classList.toggle(clase);
+
     });
 }
+
+
+btnLogin.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!mailLogin.value  || !passLogin.value) {
+        alert('debe completar todos los campos');
+    } else {
+        let datos = validarUsuario(Usuarios, mailLogin.value, passLogin.value);
+
+        if (!datos) {
+            alert('Usuario y/o contraseña incorrecto')
+        } else {
+            if (recordar.checked) {
+                guardarDatos(datos, localStorage);
+                nombreUsuario(recuperarDatos(sessionStorage));
+            }else {
+                guardarDatos(datos, sessionStorage);
+                MostrarUsuario(recuperarDatos(sessionStorage));
+            }
+            modal.hide()
+
+            presentarInfo(toggles, 'd-none');
+
+        }
+    }
+
+})
+
+btnLogout.addEventListener('click', () => {
+    borrarDatos();
+    presentarInfo(toggles, 'd-none');
+});
 
