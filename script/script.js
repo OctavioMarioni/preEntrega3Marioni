@@ -24,6 +24,7 @@ const Usuarios = [{
 }
 ]
 
+
 const mailLogin = document.getElementById('emailLogin'),
     passLogin = document.getElementById('passwordLogin'),
     recordar = document.getElementById('recordarme'),
@@ -33,22 +34,25 @@ const mailLogin = document.getElementById('emailLogin'),
     nombreUsuario = document.getElementById('nombreUsuario'),
     modal = new bootstrap.Modal(modalEl),
     toggles = document.querySelectorAll('.toggles');
+    
 
-function validarUsuario(baseUsuarios, user, pass) {
-    let encontrado = baseUsuarios.find((baseUsuarios) => baseUsuarios.mail == user);
 
-    if (typeof encontrado === 'undefined') {
-        return false;
 
-    } else {
-        if (encontrado.pass != pass) {
+    function validarUsuario(baseUsuarios, user, pass) {
+        let encontrado = baseUsuarios.find((baseUsuarios) => baseUsuarios.mail == user);
+
+        if (typeof encontrado === 'undefined') {
             return false;
 
         } else {
-            return encontrado;
+            if (encontrado.pass != pass) {
+                return false;
+
+            } else {
+                return encontrado;
+            }
         }
     }
-}
 
 
 function guardarDatos(baseUsuario, storage) {
@@ -68,11 +72,8 @@ function recuperarDatos(storage) {
 }
 
 function MostrarUsuario(usuario) {
-    nombreUsuario.innerHTML = `<span>${usuario.name}</span>`
+    nombreUsuario.innerHTML = `Bienvenido/a, <span>${usuario.name}</span>`
 }
-
-
-
 
 function hudLogeado(array, clase) {
     array.forEach(element => {
@@ -81,11 +82,42 @@ function hudLogeado(array, clase) {
     });
 }
 
+function crearTarjetas(arrayElementos, contenedorHTML) {
+    contenedorHTML.innerHTML = '';
+
+    for (const elemento of arrayElementos) {
+
+        let divColTarjeta = document.createElement('div');
+
+        divColTarjeta.className = 'col';
+
+        divColTarjeta.innerHTML = `
+        <div class="card h-100 bg-light">
+            <h4 class="card-header">${elemento.titulo}</h4>
+            <img " class="coverLibro" alt="imagen de juego ${elemento.img}">
+            <div class="card-body">
+            <h6 class="card-text fst-italic">Autor</h6>
+                <p class="card-text">${elemento.Categoria}</p>
+                <h6 class="card-text fst-italic">Resumen</h6>
+                <p class="card-text">${elemento.precio}</p>
+            </div>
+            <div class="card-footer">
+            <span>Precio: ${elemento.precio} puntos</span>
+            </div>
+        </div>`;
+
+        contenedorHTML.append(divColTarjeta);
+    }
+
+}
+
+
+
 
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (!mailLogin.value  || !passLogin.value) {
+    if (!mailLogin.value || !passLogin.value) {
         alert('debe completar todos los campos');
     } else {
         let datos = validarUsuario(Usuarios, mailLogin.value, passLogin.value);
@@ -96,13 +128,13 @@ btnLogin.addEventListener('click', (e) => {
             if (recordar.checked) {
                 guardarDatos(datos, localStorage);
                 nombreUsuario(recuperarDatos(sessionStorage));
-            }else {
+            } else {
                 guardarDatos(datos, sessionStorage);
                 MostrarUsuario(recuperarDatos(sessionStorage));
             }
             modal.hide()
 
-            presentarInfo(toggles, 'd-none');
+            hudLogeado(toggles, 'd-none');
 
         }
     }
@@ -111,6 +143,5 @@ btnLogin.addEventListener('click', (e) => {
 
 btnLogout.addEventListener('click', () => {
     borrarDatos();
-    presentarInfo(toggles, 'd-none');
+    hudLogeado(toggles, 'd-none');
 });
-
