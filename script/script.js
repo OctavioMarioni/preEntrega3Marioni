@@ -24,7 +24,6 @@ const Usuarios = [{
 }
 ]
 
-
 const mailLogin = document.getElementById('emailLogin'),
     passLogin = document.getElementById('passwordLogin'),
     recordar = document.getElementById('recordarme'),
@@ -34,25 +33,23 @@ const mailLogin = document.getElementById('emailLogin'),
     nombreUsuario = document.getElementById('nombreUsuario'),
     modal = new bootstrap.Modal(modalEl),
     toggles = document.querySelectorAll('.toggles');
-    
 
 
+function validarUsuario(baseUsuarios, user, pass) {
+    let encontrado = baseUsuarios.find((baseUsuarios) => baseUsuarios.mail == user);
 
-    function validarUsuario(baseUsuarios, user, pass) {
-        let encontrado = baseUsuarios.find((baseUsuarios) => baseUsuarios.mail == user);
+    if (typeof encontrado === 'undefined') {
+        return false;
 
-        if (typeof encontrado === 'undefined') {
+    } else {
+        if (encontrado.pass != pass) {
             return false;
 
         } else {
-            if (encontrado.pass != pass) {
-                return false;
-
-            } else {
-                return encontrado;
-            }
+            return encontrado;
         }
     }
+}
 
 
 function guardarDatos(baseUsuario, storage) {
@@ -117,7 +114,7 @@ function crearTarjetas(arrayElementos, contenedorHTML) {
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (!mailLogin.value || !passLogin.value) {
+    if (!mailLogin.value  || !passLogin.value) {
         alert('debe completar todos los campos');
     } else {
         let datos = validarUsuario(Usuarios, mailLogin.value, passLogin.value);
@@ -128,7 +125,7 @@ btnLogin.addEventListener('click', (e) => {
             if (recordar.checked) {
                 guardarDatos(datos, localStorage);
                 nombreUsuario(recuperarDatos(sessionStorage));
-            } else {
+            }else {
                 guardarDatos(datos, sessionStorage);
                 MostrarUsuario(recuperarDatos(sessionStorage));
             }
@@ -145,3 +142,37 @@ btnLogout.addEventListener('click', () => {
     borrarDatos();
     hudLogeado(toggles, 'd-none');
 });
+
+
+
+let carrito = [];
+
+
+let btnsAgregar = document.querySelectorAll('.botonesTarjeta button:first-child');
+
+
+btnsAgregar.forEach(function(btnAgregar) {
+    btnAgregar.addEventListener('click', function(event) {
+        let idProducto = event.target.parentNode.parentNode.id;
+        agregarAlCarrito(idProducto);
+    });
+});
+
+
+function agregarAlCarrito(idProducto) {
+    carrito.push(idProducto);
+    console.log('Producto agregado al carrito:', idProducto);
+
+    let contenedorCarrito = document.getElementById('carrito');
+    let listaCarrito = document.getElementById('listaCarrito');
+
+
+    let itemCarrito = document.createElement('li');
+    itemCarrito.textContent = idProducto;
+    listaCarrito.appendChild(itemCarrito);
+
+
+    let totalCarrito = document.getElementById('totalCarrito');
+    totalCarrito.textContent = 'Total: $' + calcularTotalCarrito();
+}
+

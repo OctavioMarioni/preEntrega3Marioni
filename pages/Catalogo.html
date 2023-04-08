@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../assets/css/style.css" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script defer src="../script/script.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bodyCatalogo">
     <nav class="nav-lg navbar navbar-expand-lg bg-body-tertiary">
@@ -23,7 +24,6 @@
               <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
               <a class="nav-link" href="./quienesSomos.html">Quines somos</a>
               <a class="nav-link" href="./Catalogo.html">Catalogo</a>
-              <a class="nav-link d-none toggles" href="./pages/carrito.html">Carrito</a>
               <form class="d-flex">
 
                 <button id="btnModalLogin" class="btn btn-outline-primary me-2 toggles" type="button" data-bs-toggle="modal"
@@ -73,12 +73,12 @@
                 <img src="../assets/img/tarjeta-1.jpg" alt="A Memoir Blue game">
             </div>
             <div class="descripcionTarjeta">
-                <h4>A Memoir Blue</h4>
                 <p>Un juego que combina arte tradicional con modelados en tres dimensiones para contar una historia personal.</p>
+                <p>Precio: $19.99</p>
             </div>
 
             <div class="botonesTarjeta">
-                <button>Comprar</button>
+                <button id="btnComprar1">Comprar</button>
                 <button>Mas info.</button>
             </div>
         </div>
@@ -87,11 +87,11 @@
                 <img src="../assets/img/tarjeta-2.jpg" alt="Rogue Legacy 2 Portada">
             </div>
             <div class="descripcionTarjeta">
-                <h4>Rogue Legacy 2</h4>
                 <p>Rogue Legacy, juego donde cada partida debemos adentrarnos en un castillo generado de forma aleatoria</p>
+                <p>Precio: $14.99</p>
             </div>
             <div class="botonesTarjeta">
-                <button>Comprar</button>
+                <button id="btnComprar2">Comprar</button>
                 <button>Mas info.</button>
             </div>
         </div>
@@ -100,12 +100,12 @@
                 <img src="../assets/img/tarjeta-3.jpg" alt="Trek To Yomi Portada">
             </div>
             <div class="descripcionTarjeta">
-                <h4>Trek To Yomi</h4>
                 <p>Hiroki juró a su maestro en su lecho de muerte proteger la ciudad y su amado pueblo de cualquier tipo de amenaza.</p>
+                <p>Precio: $9.99</p>
             </div>
 
             <div class="botonesTarjeta">
-                <button>Comprar</button>
+                <button id="btnComprar3">Comprar</button>
                 <button>Mas info.</button>
             </div>
         </div>
@@ -115,17 +115,33 @@
                 <img src="../assets/img/tarjeta-4.jpg" alt="Kao the kangaroo Portada">
             </div>
             <div class="descripcionTarjeta">
-                <h4>Kao the kangaroo</h4>
                 <p>Se trata del regreso de un juego de plataformas y acción con 20 años a sus espaldas</p>
+                 <p>Precio: $13.50</p>
             </div>
 
             <div class="botonesTarjeta">
+                <button id="btnComprar1">comprar</button>
                 <button>Mas info.</button>
-                <button type="submit" id="btnAdd">Agregar</button>
+                
+            </div>
+        </div>
+
+        <div class="col-md-4 d-none toggles">
+            <!-- Carrito de compras -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Carrito de Compras</h5>
+                    <ul class="list-group" id="listaCarrito">
+                        <!-- Lista de productos del carrito -->
+                    </ul>
+                </div>
             </div>
         </div>
 
     </div>
+
+
+
     <footer>
         
             <div class="footerIzquierda">
@@ -149,6 +165,10 @@
             </div>
         
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
 
